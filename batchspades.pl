@@ -61,15 +61,12 @@ for my $libID (@libIDs) {
 #PBS -q batch
 #PBS -l nodes=1:ppn=8
 #PBS -l walltime=100:00:00
-#PBS -l mem=60gb
-
-#PBS -M shawnt\@uga.edu
-#PBS -m ae   
+#PBS -l mem=60gb  
 
 cd \$PBS_O_WORKDIR
 ml spades/3.12.0-k_245
 
-python /usr/local/apps/gb/spades/3.12.0-k_245/bin/spades.py -1 $reads/$libID\_paired_R1.fastq -2 $reads/$libID\_paired_R2.fastq --only-assembler  --threads $CPU --memory 60  -o $dir$libID";
+python /usr/local/apps/gb/spades/3.12.0-k_245/bin/spades.py -1 $reads/$libID\_R1_P.fastq -2 $reads/$libID\_R2_P.fastq --only-assembler  --threads $CPU --memory 60  -o $dir$libID";
         system "qsub ./$libID.spades.sh";
 		chdir("$wd");
 		close OUT;

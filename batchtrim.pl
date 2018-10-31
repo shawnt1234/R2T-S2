@@ -44,9 +44,6 @@ for my $libID (@libIDs) {
 #PBS -l walltime=20:00:00
 #PBS -l mem=40gb
 
-#PBS -M shawnt\@uga.edu
-#PBS -m ae
-
 cd \$PBS_O_WORKDIR
 
 module load Trimmomatic/0.36-Java-1.8.0_144

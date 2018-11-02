@@ -59,7 +59,7 @@ for my $libID (@libIDs) {
 #PBS -S /bin/bash
 #PBS -N $libID\_SPAdes
 #PBS -q batch
-#PBS -l nodes=1:ppn=8
+#PBS -l nodes=1:ppn=$CPU
 #PBS -l walltime=100:00:00
 #PBS -l mem=60gb  
 

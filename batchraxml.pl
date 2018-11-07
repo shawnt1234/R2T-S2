@@ -8,14 +8,15 @@ use Array::Utils qw(:all);
 
 #Assumes you have one most distant outgroup, as opposed to a number of outgroups that are sister to each other. This script does allow for the most furthest outgroup to be missing - it will use the next distant outgroup. If none of your outgroups exist in the alignment, RAxML will not run.
 
-my $outfile = $ARGV[0]; #file of outgroup IDs
+my $outfile = $ARGV[0]; #file of sample IDs
 my $boots = $ARGV[1];
 my $ending = $ARGV[2];
+my $outpath = $ARGV[3];
 my @files = glob("*$ending");
 my @outgroups;
 my $wd = getcwd;
 
-open IN, "<$outfile"; #put all outgroups into an array
+open IN, "<$outfile"; #put all sample IDs into an array
 while (<IN>) {
 	chomp;
 	my $line = $_;
@@ -98,7 +99,7 @@ echo \"Nodes:  \$(cat \$PBS_NODEFILE | sort -u | tr '\\n' ' ')\"
 echo \"mpirun: \$(which mpirun)\"
 echo
 
-mpirun raxmlHPC-MPI-AVX -f a -x 1237 -p 12345 -N $boots -m GTRGAMMA -s $file.mod.phylip -n $ID.raxml.out -w /lustre1/shawnt/prank";
+mpirun raxmlHPC-MPI-AVX -f a -x 1237 -p 12345 -N $boots -m GTRGAMMA -s $file.mod.phylip -n $ID.raxml.out -w $outpath";
     close OUT2;
     system "qsub run.$ID\_raxml.sh";
 	}
